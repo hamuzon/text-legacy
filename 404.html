@@ -131,6 +131,13 @@ a.back-btn:hover {
 </div>
 
 <script>
+const ACCENT_COLOR_STORAGE_KEY = 'text-enlarger-accent-color';
+
+const storedAccentColor = localStorage.getItem(ACCENT_COLOR_STORAGE_KEY);
+if (storedAccentColor && /^#[0-9a-fA-F]{6}$/.test(storedAccentColor)) {
+  document.documentElement.style.setProperty('--accent-color', storedAccentColor);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (location.hostname === 'hamuzon.github.io') {
     document.getElementById('backLink').href = 'https://hamuzon.github.io/olympic/';

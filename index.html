@@ -219,6 +219,7 @@
   </footer>
 
   <script>
+    const ACCENT_COLOR_STORAGE_KEY = "text-enlarger-accent-color";
     const textInput        = document.getElementById("textInput");
     const displayArea      = document.getElementById("displayArea");
     const fontSizeSlider   = document.getElementById("fontSizeSlider");
@@ -237,6 +238,7 @@
     }
 
     function updateStyles() {
+      document.documentElement.style.setProperty("--accent-color", accentSelector.value);
       displayArea.style.fontSize   = fontSizeSlider.value + "px";
       displayArea.style.fontWeight = fontWeightSlider.value;
       displayArea.style.lineHeight = lineHeightSlider.value;
@@ -249,6 +251,8 @@
 
       header.style.backgroundColor = accentSelector.value;
       header.style.color           = getContrastColor(accentSelector.value);
+
+      localStorage.setItem(ACCENT_COLOR_STORAGE_KEY, accentSelector.value);
     }
 
     function luminance(r, g, b) {
@@ -285,6 +289,11 @@
 
     fontSelector.addEventListener("input", updateStyles);
     accentSelector.addEventListener("input", updateStyles);
+
+    const storedAccentColor = localStorage.getItem(ACCENT_COLOR_STORAGE_KEY);
+    if (storedAccentColor && /^#[0-9a-fA-F]{6}$/.test(storedAccentColor)) {
+      accentSelector.value = storedAccentColor;
+    }
 
     updateDisplay();
     updateStyles();
