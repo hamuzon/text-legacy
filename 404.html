@@ -7,7 +7,7 @@
   <link rel="icon" href="icon-light.png" type="image/png" />
   <style>
     :root {
-      --color-primary: #00793d;
+      --color-frame: #00793d;
       --color-secondary: #4a6354;
       --color-background: #ffffff;
       --color-on-background: #1a1c19;
@@ -45,9 +45,9 @@
 
     .card {
       width: min(560px, 100%);
-      border: 2px solid var(--color-primary);
+      border: 2px solid var(--color-frame);
       border-radius: var(--shape-corner-medium);
-      box-shadow: 0 0 16px var(--color-primary);
+      box-shadow: 0 0 16px color-mix(in srgb, var(--color-frame) 50%, transparent);
       background-color: var(--color-background);
       text-align: center;
       padding: 2rem 1.5rem;
@@ -55,7 +55,7 @@
 
     h1 {
       font-size: clamp(3rem, 12vw, 5rem);
-      color: var(--color-primary);
+      color: var(--color-on-background);
       line-height: 1.1;
       margin-bottom: 0.75rem;
     }
@@ -74,8 +74,8 @@
       display: inline-block;
       padding: 0.65rem 1.2rem;
       background: transparent;
-      color: var(--color-primary);
-      border: 1px solid var(--color-primary);
+      color: var(--color-on-background);
+      border: 1px solid var(--color-frame);
       text-decoration: none;
       border-radius: var(--shape-corner-medium);
       font-weight: 600;
@@ -94,7 +94,7 @@
     }
 
     footer a {
-      color: var(--color-primary);
+      color: var(--color-secondary);
       text-decoration: none;
     }
 
@@ -116,11 +116,42 @@
   <footer id="footer-copy"></footer>
 
   <script>
-    function applyThemeFromAppState() {
-      const back = document.querySelector('.back');
-      if (back) {
-        back.style.backgroundColor = 'transparent';
+    function isValidHexColor(value) {
+      return /^#[0-9a-fA-F]{6}$/.test(value);
+    }
+
+    function resolveAccentColor() {
+      const params = new URLSearchParams(window.location.search);
+      const queryColor = params.get('color');
+      if (isValidHexColor(queryColor || '')) {
+        return queryColor;
       }
+
+      const legacyAccent = localStorage.getItem('text-enlarger-accent-color');
+      if (isValidHexColor(legacyAccent || '')) {
+        return legacyAccent;
+      }
+
+      try {
+        const state = JSON.parse(localStorage.getItem('textAppState') || '{}');
+        if (isValidHexColor(state.color || '')) {
+          return state.color;
+        }
+      } catch (_error) {
+        // ignore parse failures
+      }
+
+      return '';
+    }
+
+    function applyThemeFromAppState() {
+      const accent = resolveAccentColor();
+      if (!accent) {
+        return;
+      }
+
+      const frameColor = accent.toLowerCase() === '#ffffff' ? '#cfcfcf' : accent;
+      document.documentElement.style.setProperty('--color-frame', frameColor);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
