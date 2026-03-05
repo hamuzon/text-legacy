@@ -1,104 +1,168 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>404 - Not Found</title>
-  <link rel="icon" href="icon-light.png" type="image/png" />
-  <style>
-    :root {
-      --color-primary: #00793d;
-      --color-primary-contrast-light: #ffffff;
-      --color-secondary: #4a6354;
-      --color-background: #ffffff;
-      --color-on-background: #1a1c19;
-      --shape-corner-medium: 12px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - Not Found</title>
+<link rel="icon" href="icon-light.png" type="image/png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+:root {
+  --color-primary: #00793d;
+  --color-primary-contrast-light: #ffffff;
+  --color-secondary: #4a6354;
+  --color-background: #ffffff;
+  --color-on-background: #1a1c19;
+  --shape-corner-medium: 12px;
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      font-family: 'Noto Serif JP', serif;
-      background: var(--color-background);
-      color: var(--color-on-background);
-    }
+  --selection-bg: rgba(0, 121, 61, 0.3);
+  --selection-text: #ffffff;
+}
 
-    .container {
-      width: 100%;
-      max-width: 640px;
-      border: 2px solid var(--color-primary);
-      border-radius: var(--shape-corner-medium);
-      box-shadow: 0 0 12px var(--color-primary);
-      background: #ffffff;
-      text-align: center;
-      overflow: hidden;
-    }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-    h1 {
-      background: var(--color-primary);
-      color: var(--color-primary-contrast-light);
-      font-size: clamp(2.8rem, 7vw, 4.5rem);
-      letter-spacing: 0.08em;
-      padding: 1.25rem 1rem;
-    }
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-text);
+}
 
-    .content {
-      padding: 2rem 1.5rem;
-    }
+body {
+  background: var(--color-background);
+  font-family: 'Noto Serif JP', serif;
+  color: var(--color-on-background);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
 
-    p {
-      font-size: 1.2rem;
-      line-height: 1.7;
-      margin-bottom: 0.4rem;
-    }
+.container {
+  background: #ffffff;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--shape-corner-medium);
+  padding: 3rem 2rem;
+  max-width: 560px;
+  width: 100%;
+  box-shadow: 0 0 12px var(--color-primary);
+  text-align: center;
+  position: relative;
+}
 
-    .subtext {
-      color: var(--color-secondary);
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
+h1 {
+  font-family: Arial, sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
 
-    a.back {
-      display: inline-block;
-      margin-top: 0.5rem;
-      padding: 0.75rem 1.75rem;
-      border-radius: var(--shape-corner-medium);
-      background: var(--color-primary);
-      color: var(--color-primary-contrast-light);
-      text-decoration: none;
-      font-weight: 700;
-      transition: filter 0.2s ease;
-    }
+p.message {
+  font-size: 1.2rem;
+  color: var(--color-on-background);
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
 
-    a.back:hover {
-      filter: brightness(1.08);
-    }
+p.message span {
+  font-size: 0.9em;
+  color: var(--color-secondary);
+}
 
-    .footer {
-      margin-top: 1.25rem;
-      color: var(--color-secondary);
-      font-size: 0.95rem;
-    }
-  </style>
+a.back-btn {
+  display: inline-block;
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--shape-corner-medium);
+  color: var(--color-primary-contrast-light);
+  font-weight: 600;
+  padding: 10px 24px;
+  cursor: pointer;
+  font-family: 'Noto Serif JP', serif;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+a.back-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 0 10px rgba(0, 121, 61, 0.4);
+}
+
+.footer {
+  font-size: 0.9rem;
+  color: var(--color-secondary);
+  margin-top: 2rem;
+  border-top: 1px solid rgba(74, 99, 84, 0.25);
+  padding-top: 1rem;
+}
+
+.footer a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer a:hover {
+  color: var(--color-on-background);
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .container { padding: 2rem 1.5rem; }
+  h1 { font-size: 3rem; }
+}
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>404</h1>
-    <div class="content">
-      <p>ページが見つかりません</p>
-      <p class="subtext">Sorry, Not Found.</p>
-      <a id="backLink" class="back" href="/">トップページへ戻る</a>
-      <p class="footer">Text enlargement app</p>
-    </div>
-  </div>
+
+<div class="container">
+  <h1>404</h1>
+  <p class="message">ページが見つかりません<br><span>Sorry, Not Found.</span></p>
+
+  <a id="backLink" class="back-btn" href="/">トップページへ戻る</a>
+
+  <div class="footer" id="footer-copy"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  if (location.hostname === 'hamuzon.github.io') {
+    document.getElementById('backLink').href = 'https://hamuzon.github.io/olympic/';
+  }
+});
+
+(function(){
+  const baseYear = 2025;
+  const currentYear = new Date().getFullYear();
+  const hostname = location.hostname;
+  const footer = document.getElementById('footer-copy');
+  let footerHTML = '';
+
+  let yearStr = baseYear.toString();
+  if (currentYear > baseYear) {
+    yearStr = `${baseYear}–${currentYear}`;
+  } else if (currentYear < baseYear) {
+    yearStr = `${currentYear}–${baseYear}`;
+  }
+
+  if(hostname === 'hamuzon.github.io'){
+    footerHTML = `&copy; ${yearStr} <a href='https://hamuzon.github.io' target='_blank' rel='noopener noreferrer'>@hamuzon</a>`;
+  } else if (hostname.includes('hamuzon-jp.f5.si')) {
+    footerHTML = `&copy; ${yearStr} <a href='https://hamuzon-jp.f5.si' target='_blank' rel='noopener noreferrer'>@hamuzon</a>`;
+  } else if(hostname.includes('hamusata.f5.si')){
+    footerHTML = `&copy; ${yearStr} <a href='https://hamusata.f5.si' target='_blank' rel='noopener noreferrer'>@hamusata</a>`;
+  } else {
+    footerHTML = `&copy; ${yearStr} Text enlargement app`;
+  }
+
+  if(footer) footer.innerHTML = footerHTML;
+})();
+</script>
+
 </body>
 </html>
